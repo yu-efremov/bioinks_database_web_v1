@@ -1,42 +1,20 @@
 from flask import Flask, render_template, jsonify, request
 
+from database import load_bioinks_from_db
+
 app = Flask(__name__)
 
-JOBS = [
-  {
-    'id': 1,
-    'title': 'Data Analyst',
-    'location': 'Bengaluru, India',
-    'salary': 'Rs. 10,00,000'
-  },
-  {
-    'id': 2,
-    'title': 'Data Scientist',
-    'location': 'Delhi, India',
-    'salary': 'Rs. 15,00,000'
-  },
-  {
-    'id': 3,
-    'title': 'Frontend Engineer',
-    'location': 'Remote'
-  },
-  {
-    'id': 4,
-    'title': 'Backend Engineer',
-    'location': 'San Francisco, USA',
-    'salary': '$150,000'
-  }
-]
-
 @app.route("/")
-def hello_jovian():
-    return render_template('home.html', 
-                           jobs=JOBS, 
-                           company_name='Jovian')
+def hello_bioinks():
+  bioinks = load_bioinks_from_db()
+  return render_template('home.html', 
+                         bioinks=bioinks)
 
-@app.route("/api/jobs")
-def list_jobs():
-  return jsonify(JOBS)
+
+@app.route("/api/bioinks/<id>")
+def list_bioinks():
+  bioinks = load_bioinks_from_db()
+  return jsonify(bioinks)
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', debug=True)

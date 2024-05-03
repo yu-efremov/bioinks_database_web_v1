@@ -13,14 +13,17 @@ engine = create_engine(
   })
 
 
-def load_jobs_from_db():
+def load_bioinks_from_db():
   with engine.connect() as conn:
-    result = conn.execute(text("select * from jobs"))
-    jobs = []
-    for row in result.all():
-      jobs.append(dict(row))
-    return jobs
+    result = conn.execute(text("select * from bioinks_test1"))
+    bioinks = []
+    for row in result.mappings().all():
+      # print(row)
+      results_as_dict = row # .mappings().all()
+      bioinks.append(results_as_dict)
+    print(bioinks)
+    return bioinks
 
-with engine.connect() as connection:
-  result = connection.execute(text("select * from bioinks_test1"))
-  print(result.all())
+#with engine.connect() as connection:
+#  result = connection.execute(text("select * from #bioinks_test1"))
+#  print(result.all())

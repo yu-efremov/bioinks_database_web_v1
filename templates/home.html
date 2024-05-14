@@ -21,17 +21,19 @@
         <img src="/static/bioprinter.jpg" style="height:320px;border-radius:4px;">
         </div>
       </div>
+      <!-- 
       <h2 class="text-center mt-2 mb-4">База данных биочернил</h2>
       <div>
         {% for bioink in bioinks %}
           {% include 'bioinkitem.html' %}
         {% endfor %}
       </div>
+      -->
+      {% include 'basictable.html' %}
       <div class="text-center">
       <a class="btn btn-primary btn-lg" href="mailto:sechenov@sechenov.ru?subject=Вопрос%20по%20базе%20биочернил&body=My%20name%3A%20%3Cyour%20name%20here%3E%0D%0A%0D%0AMy%20questions%3A%20%3Center%20question%20here%3E%0D%0A">Связаться с нами</a>
       </div>
     </div>
-    {% include 'basictable.html' %}
     {% include 'footer.html' %}
   </body>
 </html>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Basic Table</title>
+    <title>Bioink basic Table</title>
     <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
     <style>
       body {
@@ -11,7 +11,7 @@
   </head>
   <body>
     <div>
-      <h1>Basic Table</h1>
+      <h1>Таблица биочернил</h1>
       <!-- {% for user in bioinks %}
         <h1>{{ user['title'] }}</h1>
       {% endfor %} -->
@@ -32,7 +32,8 @@
           { id: 'crosslink', name: 'Crosslinking' },
           { id: 'cells', name: 'Cells' },  
           { id: 'cell_source', name: 'Cell Source' },  
-          { id: 'analysis_duration', name: 'Cell gwrowth duration' },  
+          { id: 'analysis_duration', name: 'Cell gwrowth duration' },
+          { id: 'doi', name: 'DOI' },
           { id: 'notes', name: 'Notes' },
         ],
         data: [
@@ -49,7 +50,8 @@
               crosslink: '{{ bioink['crosslink'] }}',
               cells: '{{ bioink['cells'] }}',  
               cell_source: '{{ bioink['cell_source'] }}',  
-              analysis_duration: '{{ bioink['analysis_duration'] }}',  
+              analysis_duration: '{{ bioink['analysis_duration'] }}',
+              doi: '{{ bioink['doi'] }}',
               notes: '{{ bioink['notes'] }}',
             },
           {% endfor %}
@@ -63,6 +65,7 @@
         },
         sort: true,
         pagination: true,
+        autoWidth: true,
       }).render(document.getElementById('table'));
     </script>
   </body>

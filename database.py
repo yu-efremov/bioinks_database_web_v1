@@ -21,7 +21,7 @@ def load_bioinks_from_db():
       # print(row)
       results_as_dict = row # .mappings().all()
       bioinks.append(results_as_dict)
-    print(bioinks)
+    # print(bioinks)
     return bioinks
 
 #with engine.connect() as connection:

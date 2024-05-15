@@ -22,7 +22,12 @@
     <script>
       new gridjs.Grid({
         columns: [
-          { id: 'title', name: 'Components' },
+          { id: 'title', name: 'Components',
+           //formatter: (cell) =>gridjs.html(`<b>${cell}</b>`,)
+           //formatter: (cell) =>gridjs.html(`<a href="">update</a>`,)//cell.replace('<br/>','\n\r'),)
+           //formatter: (cell) =>gridjs.html(cell.replace('<br/>','\n\r'),)
+           //formatter: (cell) =>gridjs.html(`<b>${cell}</b>`,)
+          },
           { id: 'pressure', name: 'Pressure' },
           { id: 'temperature', name: 'Temperature, C' },
           { id: 'speed', name: 'Speed, mm/s' },  
@@ -32,14 +37,19 @@
           { id: 'crosslink', name: 'Crosslinking' },
           { id: 'cells', name: 'Cells' },  
           { id: 'cell_source', name: 'Cell Source' },  
-          { id: 'analysis_duration', name: 'Cell gwrowth duration' },
-          { id: 'doi', name: 'DOI' },
-          { id: 'notes', name: 'Notes' },
+          { id: 'analysis_duration', name: 'Cell growth period' },
+          { id: 'doi', name: 'DOI',
+          formatter: (cell, row) => gridjs.html(`<a href="https://doi.org/${cell}">${cell}</a>`),
+          },
+          { id: 'notes', name: 'Notes',
+           formatter: (cell, row) => gridjs.html(`<a href="/bioinks/${row.cells[11].data}">Notes</a>`),
+          },
         ],
         data: [
           {% for bioink in bioinks %}
             {
               title: '{{ bioink['title'].replace("\n", " ") }}', // replace new line with <br/>
+              
               pressure: '{{ bioink['pressure'] }}',
               cells: '{{ bioink['cells'] }}',
               temperature: '{{ bioink['temperature'] }}',
@@ -56,9 +66,9 @@
             },
           {% endfor %}
         ],
-        // search: {
-        //   selector: (cell, rowIndex, cellIndex) => [0, 1, 4].includes(cellIndex) ? cell : null,
-        // },
+        search: {
+           selector: (cell, rowIndex, cellIndex) => [0, 1, 4].includes(cellIndex) ? cell : null,
+        },
         formatter: function(cellValue, options, rowObject) {
           console.log(cellValue);
           return cellValue.replace('<br/>','\n\r');
@@ -66,6 +76,8 @@
         sort: true,
         pagination: true,
         autoWidth: true,
+        //width: 3000,
+        resizable: true
       }).render(document.getElementById('table'));
     </script>
   </body>

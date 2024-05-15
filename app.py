@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request
 
 from database import load_bioinks_from_db
 
+
 app = Flask(__name__)
 
 @app.route("/")
